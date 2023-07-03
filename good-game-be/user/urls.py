@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-#URLConf
+
 urlpatterns = [
-    path('games/', views.say_hello)
+    path('user/', views.say_hello),
 ]
