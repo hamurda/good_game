@@ -13,4 +13,4 @@ class User(models.Model):
         return self.username
 
     class Meta:
-        ordering = ['username']
+        ordering = ['username', 'first_name', 'last_name']
