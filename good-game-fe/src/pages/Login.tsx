@@ -1,37 +1,48 @@
-import RequiredFormEntry from "../components/RequiredFormEntry";
-import {Box, StackDivider, VStack} from "@chakra-ui/react";
-import { Button } from '@chakra-ui/react'
-import {useState} from "react";
+import { FieldValues, useForm} from "react-hook-form";
+import {z} from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {Box, StackDivider, VStack, Button, FormLabel, Input, FormErrorMessage, FormControl} from "@chakra-ui/react";
 
-function Login() {
-    const [emailTyped, setEmailTyped] = useState(false)
-    const [passwordTyped, setPasswordTyped] = useState(false)
-    const handleEmailChange = (isError: boolean) => setEmailTyped(isError)
-    const handlePasswordChange = (isError: boolean) => setPasswordTyped(isError)
+
+const schema = z.object({
+    username: z.string().min(3),
+    password: z.string().min(3).max(20)
+});
+
+type FormData = z.infer<typeof schema>
+
+const Login = () => {
+    const {
+        register,
+        handleSubmit ,
+        formState ,
+    } = useForm<FormData>({resolver: zodResolver(schema)});
+    const onSubmit = (data: FieldValues) => {
+        console.log(data);
+    }
 
     return (
         <>
-            <VStack
-                divider={<StackDivider borderColor='gray.200' />}
-                spacing={4}
-                align='stretch'
-            >
-                <Box>
-                    <h1>Login</h1>
-                </Box>
-                <Box>
-                    <RequiredFormEntry type='email' label='Email' toDisable={handleEmailChange} />
-                    <RequiredFormEntry type='password' label='Password' toDisable={handlePasswordChange} />
-                </Box>
-                <Box>
-                    <Button colorScheme='blue'
-                            width='stretch'
-                            isDisabled={emailTyped || passwordTyped}
-                            onClick={() => console.log(passwordTyped)}>Login</Button>
-                </Box>
-            </VStack>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <VStack divider={<StackDivider borderColor='gray.200' />}
+                        spacing={4}
+                        align='stretch'>
+                    <Box>
+                        <FormControl isRequired mb="10px">
+                            <FormLabel>Username</FormLabel>
+                            <Input {...register("username")}/>
+                        </FormControl>
+                        <FormControl isRequired>
+                            <FormLabel>Password</FormLabel>
+                            <Input {...register("password")} type="password"/>
+                        </FormControl>
+                    </Box>
+                    <Button isDisabled={!formState.isValid} type="submit" colorScheme="teal" >Login</Button>
+                </VStack>
+            </form>
         </>
-    )
+
+    );
 }
 
 export default Login;
