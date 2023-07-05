@@ -1,7 +1,7 @@
 import { FieldValues, useForm} from "react-hook-form";
 import {z} from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {Box, StackDivider, VStack, Button, FormLabel, Input, FormErrorMessage, FormControl} from "@chakra-ui/react";
+import {Box, StackDivider, VStack, Button, FormLabel, Input, FormControl} from "@chakra-ui/react";
 
 
 const schema = z.object({
