@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING
         },
         published: {
-            type: DataTypes.DATEONLY
+            type: DataTypes.BOOLEAN
         }
     });
 
