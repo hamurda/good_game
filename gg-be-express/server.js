@@ -14,7 +14,8 @@ app.get("/", (req, res) => {
     res.json({ message: "Welcome to Good Game." });
 });
 
-const PORT = process.env.PORT || 3000;
+require('./src/routes/game.routes')(app);
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
