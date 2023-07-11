@@ -1,7 +1,6 @@
-import {useMutation, useQuery} from "@tanstack/react-query";
 import APIClient from "./APIClient";
 
-interface Game {
+export interface Game {
     id: bigint,
     name: string,
     genre: string,
@@ -13,10 +12,11 @@ const apiClient = new APIClient<Game>("/games");
 
 class GameController{
     getAllGames = () => {
-        return useQuery<Game[], Error>({
-            queryKey: ['games'],
-            queryFn: apiClient.getAll
-        })
+        return apiClient.getAll();
+    }
+
+    createNewGame = (newGame:Game)  => {
+        return apiClient.post(newGame);
     }
 }
 

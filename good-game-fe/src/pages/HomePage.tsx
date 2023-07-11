@@ -1,10 +1,11 @@
 import StripedTable from "../components/StripedTable";
 import {VStack, Box, StackDivider, Table, Thead, Tr, Th, Tbody, Td, TableContainer, Button} from '@chakra-ui/react'
 import GameController from "../services/GameController"
+import useGames from "../services/hooks/useGames";
 
 
 function HomePage() {
-    const {data:games} = GameController.getAllGames();
+    const {data:games} = useGames();
 
     return (
         <>
