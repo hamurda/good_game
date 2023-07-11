@@ -8,33 +8,39 @@ import {
     TableContainer,
 } from '@chakra-ui/react'
 
-function StripedTable() {
+
+interface Game {
+    id: bigint,
+    name: string,
+    genre: string,
+    description: string,
+    platform:string,
+}
+
+interface Props {
+    games: Game[],
+}
+
+function StripedTable({games}:Props) {
     return (
         <TableContainer>
             <Table variant='striped' colorScheme='teal'>
                 <Thead>
                     <Tr>
-                        <Th>To convert</Th>
-                        <Th>into</Th>
-                        <Th isNumeric>multiply by</Th>
+                        <Th>Name</Th>
+                        <Th>Genre</Th>
+                        <Th>Platform</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
-                    <Tr>
-                        <Td>inches</Td>
-                        <Td>millimetres (mm)</Td>
-                        <Td isNumeric>25.4</Td>
-                    </Tr>
-                    <Tr>
-                        <Td>feet</Td>
-                        <Td>centimetres (cm)</Td>
-                        <Td isNumeric>30.48</Td>
-                    </Tr>
-                    <Tr>
-                        <Td>yards</Td>
-                        <Td>metres (m)</Td>
-                        <Td isNumeric>0.91444</Td>
-                    </Tr>
+                    {games?.map((game, index)=>{
+                        return (
+                            <Tr key={index}>
+                                <Td>{game.name}</Td>
+                                <Td>{game.genre}</Td>
+                                <Td>{game.platform}</Td>
+                            </Tr>)
+                    })}
                 </Tbody>
             </Table>
         </TableContainer>
