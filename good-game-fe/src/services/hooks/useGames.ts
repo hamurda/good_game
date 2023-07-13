@@ -8,6 +8,6 @@ const useGames = () => {
         queryKey: CACHE_KEY_GAMES,
         queryFn: GameController.getAllGames
     })
-};
+}
 
 export default useGames;

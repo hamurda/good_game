@@ -1,7 +1,7 @@
 import APIClient from "./APIClient";
 
 export interface Game {
-    id: bigint,
+    id: number,
     name: string,
     genre: string,
     description: string,
@@ -15,7 +15,7 @@ class GameController{
         return apiClient.getAll();
     }
 
-    createNewGame = (newGame:Game)  => {
+    addNewGame = (newGame:Game)  => {
         return apiClient.post(newGame);
     }
 }
