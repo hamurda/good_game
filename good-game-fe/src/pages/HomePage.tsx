@@ -13,27 +13,22 @@ import {
     Input
 } from '@chakra-ui/react'
 import useGames from "../services/hooks/useGames";
-import useAddGame from "../services/hooks/useAddGame";
 import useDeleteGame from "../services/hooks/useDeleteGame";
 import {Game} from "../services/GameController";
+import {useNavigate} from "react-router-dom";
 
 
 function HomePage() {
+    const navigate = useNavigate();
     const {data:games} = useGames();
-    const hookAddGame = useAddGame(() => {});
     const deleteGame = useDeleteGame(()=>{});
 
-    const handleAddBtn = () => {
-        hookAddGame.mutate({
-            id: 0,
-            name: "Graveyard Keeper",
-            genre: "Simulation",
-            description: "The most inaccurate medieval cemetery management sim.",
-            platform: "PC",
-        })
-    }
     const handleDeleteBtn = (game:Game) => {
         deleteGame.mutate(game);
+    }
+
+    const handleAddBtn = () => {
+        navigate("/newGame");
     }
 
     return (
@@ -55,7 +50,6 @@ function HomePage() {
                                     <Th>Genre</Th>
                                     <Th>Platform</Th>
                                     <Th></Th>
-                                    <Th></Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
@@ -65,7 +59,6 @@ function HomePage() {
                                             <Td>{game.name}</Td>
                                             <Td>{game.genre}</Td>
                                             <Td>{game.platform}</Td>
-                                            <Td><Button>Update</Button></Td>
                                             <Td><Button onClick={() => handleDeleteBtn(game)}>Delete</Button></Td>
                                         </Tr>)
                                 })}
@@ -74,29 +67,7 @@ function HomePage() {
                     </TableContainer>
                 </Box>
                 <Box>
-                    <h2>New Game</h2>
-                </Box>
-                <Box>
-                    <TableContainer>
-                        <Table variant='striped' colorScheme='green'>
-                            <Thead>
-                                <Tr>
-                                    <Th>Name</Th>
-                                    <Th>Genre</Th>
-                                    <Th>Platform</Th>
-                                    <Th></Th>
-                                </Tr>
-                            </Thead>
-                            <Tbody>
-                               <Tr>
-                                   <Td><Input/></Td>
-                                   <Td><Input/></Td>
-                                   <Td><Input/></Td>
-                                   <Td><Button onClick={handleAddBtn}>Add</Button></Td>
-                               </Tr>
-                            </Tbody>
-                        </Table>
-                    </TableContainer>
+                    <Button onClick={handleAddBtn}>Add New Game</Button>
                 </Box>
             </VStack>
         </>

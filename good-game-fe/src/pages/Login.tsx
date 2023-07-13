@@ -2,6 +2,8 @@ import { FieldValues, useForm} from "react-hook-form";
 import {z} from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {Box, StackDivider, VStack, Button, FormLabel, Input, FormControl} from "@chakra-ui/react";
+import {useNavigate} from "react-router-dom";
+import useAddGame from "../services/hooks/useAddGame";
 
 
 const schema = z.object({
@@ -12,6 +14,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 
 const Login = () => {
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit ,
@@ -19,6 +22,7 @@ const Login = () => {
     } = useForm<FormData>({resolver: zodResolver(schema)});
     const onSubmit = (data: FieldValues) => {
         console.log(data);
+        navigate("/");
     }
 
     return (
