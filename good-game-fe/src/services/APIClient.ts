@@ -22,6 +22,12 @@ class APIClient<T> {
             .post<T[]>(this.endpoint, data)
             .then(res=>res.data)
     }
+
+    delete = (id:number) => {
+        return axiosInstance
+            .delete<T[]>(this.endpoint+"/" + id.toString())
+            .then(res=>res.data)
+    }
 }
 
 export default APIClient;

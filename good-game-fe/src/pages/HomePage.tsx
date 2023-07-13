@@ -14,11 +14,14 @@ import {
 } from '@chakra-ui/react'
 import useGames from "../services/hooks/useGames";
 import useAddGame from "../services/hooks/useAddGame";
+import useDeleteGame from "../services/hooks/useDeleteGame";
+import {Game} from "../services/GameController";
 
 
 function HomePage() {
     const {data:games} = useGames();
     const hookAddGame = useAddGame(() => {});
+    const deleteGame = useDeleteGame(()=>{});
 
     const handleAddBtn = () => {
         hookAddGame.mutate({
@@ -29,7 +32,9 @@ function HomePage() {
             platform: "PC",
         })
     }
-
+    const handleDeleteBtn = (game:Game) => {
+        deleteGame.mutate(game);
+    }
 
     return (
         <>
@@ -61,7 +66,7 @@ function HomePage() {
                                             <Td>{game.genre}</Td>
                                             <Td>{game.platform}</Td>
                                             <Td><Button>Update</Button></Td>
-                                            <Td><Button>Delete</Button></Td>
+                                            <Td><Button onClick={() => handleDeleteBtn(game)}>Delete</Button></Td>
                                         </Tr>)
                                 })}
                             </Tbody>

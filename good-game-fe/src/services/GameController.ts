@@ -1,4 +1,5 @@
 import APIClient from "./APIClient";
+import {renderToReadableStream} from "react-dom/server";
 
 export interface Game {
     id: number,
@@ -17,6 +18,10 @@ class GameController{
 
     addNewGame = (newGame:Game)  => {
         return apiClient.post(newGame);
+    }
+
+    deleteGame = (game: Game) => {
+        return apiClient.delete(game.id);
     }
 }
 

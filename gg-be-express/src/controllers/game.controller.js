@@ -57,8 +57,14 @@ exports.update = async (req, res) => {
 }
 
 exports.delete = async (req, res) => {
+    console.log("deleteTrigered" , req.params);
     await Game.destroy({where: {id:req.params.id}})
-        .then(data => res.send(data))
+        .then(data => {
+            if(data===1)
+                res.status(200).send({message: "Game deleted successfully"});
+            else
+                res.status(400).send({message: "Cannot delete the game with the id:" + req.params.id});
+        })
         .catch(err => res.status(500)
             .send(err.message || "Something went wrong."));
 }
