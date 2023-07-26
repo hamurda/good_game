@@ -6,7 +6,7 @@ export interface User {
     password:string,
 }
 
-const apiClient = new APIClient<User>("/signUp");
+const apiClient = new APIClient<User>("/users");
 
 class UserController{
     getAllUsers = () => {
@@ -22,4 +22,4 @@ class UserController{
     }
 }
 
-export default UserController;
+export default new UserController;

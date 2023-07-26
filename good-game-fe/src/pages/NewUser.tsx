@@ -52,7 +52,7 @@ const NewUser = () => {
                         spacing={4}
                         align='stretch'>
                     <Box>
-                        <h2>New Game</h2>
+                        <h2>Sign Up</h2>
                     </Box>
                     <Box>
                         <TableContainer>

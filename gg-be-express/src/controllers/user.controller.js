@@ -1,8 +1,8 @@
-const User = require("../models").user;
+const User = require("../models").users;
 
 
 exports.create = async (req, res) => {
-    if (!req.body.name) {
+    if (!req.body.username) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -10,7 +10,7 @@ exports.create = async (req, res) => {
     }
 
     const user = {
-        name: req.body.name,
+        username: req.body.username,
         password: req.body.password,
     };
 
@@ -18,7 +18,7 @@ exports.create = async (req, res) => {
         .then(data=> res.send(data))
         .catch(err=> res.status(500).send({
             message:
-                err.message || "Some error occurred while creating the Game."
+                err.message || "Some error occurred while creating the User."
         }));
 };
 
