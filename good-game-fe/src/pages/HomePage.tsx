@@ -10,7 +10,6 @@ import {
     Td,
     TableContainer,
     Button,
-    Input
 } from '@chakra-ui/react'
 import useGames from "../services/hooks/useGames";
 import useDeleteGame from "../services/hooks/useDeleteGame";
