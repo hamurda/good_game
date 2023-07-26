@@ -1,12 +1,12 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import GameController, {Game} from "../GameController";
-import {CACHE_KEY_GAMES} from "./constants";
+import GameController, {Game} from "../../GameController";
+import {CACHE_KEY_GAMES} from "../constants";
 
-const useAddGame = (onAdd: () => void) => {
+const useDeleteGame = (onAdd: () => void) => {
     const queryClient = useQueryClient();
     return useMutation<Game[], Error, Game>({
-        mutationFn: GameController.addNewGame,
-        onSuccess: (savedGames, newGame) => {
+        mutationFn: GameController.deleteGame,
+        onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey:CACHE_KEY_GAMES
             })
@@ -15,4 +15,4 @@ const useAddGame = (onAdd: () => void) => {
     })
 };
 
-export default useAddGame;
+export default useDeleteGame;
