@@ -1,5 +1,4 @@
 import APIClient from "./APIClient";
-import {renderToReadableStream} from "react-dom/server";
 
 export interface Game {
     id: number,

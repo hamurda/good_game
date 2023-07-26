@@ -15,21 +15,20 @@ import {
     Tbody, Td, TableContainer
 } from "@chakra-ui/react";
 import {useNavigate} from "react-router-dom";
-import useAddGame from "../services/hooks/useAddGame";
+import useAddUser from "../services/hooks/user/useAddUser";
+
 
 
 const schema = z.object({
-    name: z.string().min(1),
-    genre: z.string().min(1),
-    description: z.string().min(1),
-    platform: z.string().min(3).max(20)
+    username: z.string().min(3),
+    password: z.string().min(3).max(20)
 });
 
 type FormData = z.infer<typeof schema>
 
 const NewUser = () => {
     const navigate = useNavigate();
-    const hookAddGame = useAddGame(() => {});
+    const hookAddUser = useAddUser(() => {});
 
     const {
         register,
@@ -38,12 +37,10 @@ const NewUser = () => {
     } = useForm<FormData>({resolver: zodResolver(schema)});
 
     const onSubmit = (data: FieldValues) => {
-        hookAddGame.mutate({
+        hookAddUser.mutate({
             id: 0,
-            name: data.name,
-            genre: data.genre,
-            description: data.description,
-            platform: data.platform,
+            username: data.username,
+            password: data.password
         })
         navigate('/');
     }
@@ -62,10 +59,8 @@ const NewUser = () => {
                             <Table variant='striped' colorScheme='green'>
                                 <Thead>
                                     <Tr>
-                                        <Th>Name</Th>
-                                        <Th>Genre</Th>
-                                        <Th>Platform</Th>
-                                        <Th>Description</Th>
+                                        <Th>Username</Th>
+                                        <Th>Password</Th>
                                         <Th></Th>
                                     </Tr>
                                 </Thead>
@@ -73,27 +68,17 @@ const NewUser = () => {
                                     <Tr>
                                         <Td>
                                             <FormControl isRequired mb="10px">
-                                                <Input {...register("name")}/>
+                                                <Input {...register("username")}/>
                                             </FormControl>
                                         </Td>
                                         <Td>
                                             <FormControl isRequired mb="10px">
-                                                <Input {...register("genre")}/>
-                                            </FormControl>
-                                        </Td>
-                                        <Td>
-                                            <FormControl isRequired mb="10px">
-                                                <Input {...register("platform")}/>
-                                            </FormControl>
-                                        </Td>
-                                        <Td>
-                                            <FormControl isRequired mb="10px">
-                                                <Input {...register("description")}/>
+                                                <Input {...register("password")}/>
                                             </FormControl>
                                         </Td>
                                         <Td>
                                             <Button isDisabled={!formState.isValid} type="submit">
-                                                Add
+                                                Sign Up
                                             </Button>
                                         </Td>
                                     </Tr>
