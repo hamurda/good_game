@@ -15,7 +15,7 @@ import {
     Tbody, Td, TableContainer
 } from "@chakra-ui/react";
 import {useNavigate} from "react-router-dom";
-import useAddGame from "../services/hooks/useAddGame";
+import useAddGame from "../services/hooks/game/useAddGame";
 
 
 const schema = z.object({

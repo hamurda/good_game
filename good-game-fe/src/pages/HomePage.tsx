@@ -11,8 +11,8 @@ import {
     TableContainer,
     Button,
 } from '@chakra-ui/react'
-import useGames from "../services/hooks/useGames";
-import useDeleteGame from "../services/hooks/useDeleteGame";
+import useGames from "../services/hooks/game/useGames";
+import useDeleteGame from "../services/hooks/game/useDeleteGame";
 import {Game} from "../services/GameController";
 import {useNavigate} from "react-router-dom";
 
