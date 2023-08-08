@@ -1,5 +1,6 @@
 const User = require("../models").users;
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 
 exports.verifyTheUser = async (req, res) => {
@@ -9,5 +10,10 @@ exports.verifyTheUser = async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(400).send("Invalid username or password.");
 
-    res.send(true);
+    const token = jwt.sign({
+                    _id:user.id,
+                    username: user.username
+                }, 'dummyPrivateKey');
+
+    res.send(token);
 };
