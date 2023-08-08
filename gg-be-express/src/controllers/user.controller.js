@@ -2,14 +2,10 @@ const User = require("../models").users;
 
 
 exports.create = async (req, res) => {
-    if (!req.body.username) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
+    let user = await User.findOne({where: {username: req.body.username}});
+    if (user) return res.status(400).send("User already registered");
 
-    const user = {
+    user = {
         username: req.body.username,
         password: req.body.password,
     };
@@ -22,22 +18,17 @@ exports.create = async (req, res) => {
         }));
 };
 
+exports.findOne = async (req, res) => {
+    await User.findOne({where: {username: req.body.username}})
+        .then(data => res.send(data))
+        .catch(err => res.status(500)
+            .send(err.message || "Some error occurred while finding the User."));
+}
+
 exports.getAll = async (req, res) => {
     const users = await User.findAll();
     res.send(users);
 };
-
-exports.findAll = async (req, res) => {
-    const users = await User.findAll();
-    res.send(users);
-};
-
-exports.findAllByUsername = async (req, res) => {
-    await User.findAll({where: {username: req.body.username}})
-        .then(data => res.send(data))
-        .catch(err => res.status(500)
-            .send(err.message || "Something went wrong."));
-}
 
 exports.findById = async (req, res) => {
     await User.findByPk(req.params.id)

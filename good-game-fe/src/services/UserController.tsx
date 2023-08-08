@@ -13,6 +13,10 @@ class UserController{
         return apiClient.getAll();
     }
 
+    getUser = ( user:User ) => {
+        return apiClient.get(user.id);
+    }
+
     addNewUser = (newUser:User)  => {
         return apiClient.post(newUser);
     }

@@ -1,4 +1,5 @@
-module.exports = app =>{
+const users = require("../controllers/user.controller");
+module.exports = app => {
     const users = require("../controllers/user.controller");
     const router = require("express").Router();
 
@@ -9,12 +10,12 @@ module.exports = app =>{
         next();
     });
 
-    router.get("/", users.findAll);
+    router.get("/", users.getAll);
     router.post("/", users.create);
     router.get("/:id", users.findById);
+    router.get("/:username", users.findOne);
     router.put("/:id", users.update);
     router.delete("/:id", users.delete);
-    router.get("/byUsername", users.findAllByUsername);
 
     app.use('/api/users', router);
 }
