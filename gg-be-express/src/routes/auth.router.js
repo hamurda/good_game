@@ -1,5 +1,5 @@
 module.exports = app => {
-    const users = require("../controllers/user.controller");
+    const auth = require("../controllers/auth.controller");
     const router = require("express").Router();
 
     app.use(function(req, res, next) {
@@ -9,12 +9,7 @@ module.exports = app => {
         next();
     });
 
-    router.get("/", users.getAll);
-    router.post("/", users.create);
-    router.get("/:id", users.findById);
-    router.get("/:username", users.findOne);
-    router.put("/:id", users.update);
-    router.delete("/:id", users.delete);
+    router.post("/", auth.verifyTheUser);
 
-    app.use('/api/users', router);
+    app.use('/api/auth', router);
 }
