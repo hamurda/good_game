@@ -1,4 +1,5 @@
 const User = require("../models").users;
+const bcrypt = require('bcrypt');
 const _ = require('lodash');
 
 exports.create = async (req, res) => {
@@ -6,6 +7,8 @@ exports.create = async (req, res) => {
     if (user) return res.status(400).send("User already registered");
 
     user = _.pick(req.body, ['username', 'password']);
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
 
     await User.create(user)
         .then(data=> res.send(_.pick(data, ['username'])))
