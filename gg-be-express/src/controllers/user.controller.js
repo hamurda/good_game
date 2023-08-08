@@ -1,17 +1,14 @@
 const User = require("../models").users;
-
+const _ = require('lodash');
 
 exports.create = async (req, res) => {
     let user = await User.findOne({where: {username: req.body.username}});
     if (user) return res.status(400).send("User already registered");
 
-    user = {
-        username: req.body.username,
-        password: req.body.password,
-    };
+    user = _.pick(req.body, ['username', 'password']);
 
     await User.create(user)
-        .then(data=> res.send(data))
+        .then(data=> res.send(_.pick(data, ['username'])))
         .catch(err=> res.status(500).send({
             message:
                 err.message || "Some error occurred while creating the User."
