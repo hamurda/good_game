@@ -1,5 +1,6 @@
 const User = require("../models").users;
 const bcrypt = require('bcrypt');
+const config = require('config');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 
@@ -13,7 +14,7 @@ exports.verifyTheUser = async (req, res) => {
     const token = jwt.sign({
                     _id:user.id,
                     username: user.username
-                }, 'dummyPrivateKey');
+                }, config.get('jwtPrivateKey'));
 
     res.send(token);
 };

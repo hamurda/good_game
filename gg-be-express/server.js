@@ -1,10 +1,18 @@
 const express = require("express");
+const config = require('config');
 const app = express();
+
+
+if (!config.get('jwtPrivateKey')) {
+    console.log("no key")
+    process.exit(1);
+}
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const db = require("./src/models");
-db.sequelize.sync({alter:true}).then(() => {
+db.sequelize.sync({ alter: true}).then(() => {
     console.log('Tables created successfully!');
 }).catch((error) => {
     console.error('Unable to create table : ', error);
