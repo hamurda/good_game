@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
         return jwt.sign({
             _id:this.id,
             username: this.username
-        }, config.get('jwtPrivateKey'));
+        }, config.get('jwtKey'));
     }
 
     return User;

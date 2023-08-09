@@ -3,7 +3,7 @@ const config = require('config');
 const app = express();
 
 
-if (!config.get('jwtPrivateKey')) {
+if (!config.get('jwtKey')) {
     console.log("no key")
     process.exit(1);
 }

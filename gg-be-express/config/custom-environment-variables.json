@@ -1,3 +1,3 @@
 {
-  "jwtPrivateKey" : "goodgame_jwtPrivateKey"
+  "jwtKey" : "goodgame_jwtKey"
 }
