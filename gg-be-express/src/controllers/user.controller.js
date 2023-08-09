@@ -1,6 +1,8 @@
 const User = require("../models").users;
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
+const jwt = require("jsonwebtoken");
+const config = require("config");
 
 exports.create = async (req, res) => {
     let user = await User.findOne({where: {username: req.body.username}});
@@ -11,7 +13,10 @@ exports.create = async (req, res) => {
     user.password = await bcrypt.hash(user.password, salt);
 
     await User.create(user)
-        .then(data=> res.send(_.pick(data, ['username'])))
+        .then(data=> {
+            const token = data.generateJWT();
+            res.header('x-auth-token', token).send(_.pick(data, ['username']))
+        })
         .catch(err=> res.status(500).send({
             message:
                 err.message || "Some error occurred while creating the User."

@@ -1,4 +1,8 @@
 const {DataTypes} = require("sequelize");
+const jwt = require("jsonwebtoken");
+const config = require("config");
+
+
 module.exports = (sequelize) => {
     const User = sequelize.define("user", {
         username: {
@@ -11,6 +15,13 @@ module.exports = (sequelize) => {
             allowNull: false
         },
     });
+
+    User.prototype.generateJWT = function() {
+        return jwt.sign({
+            _id:this.id,
+            username: this.username
+        }, config.get('jwtPrivateKey'));
+    }
 
     return User;
 };
