@@ -1,8 +1,6 @@
 const User = require("../models").users;
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
-const jwt = require("jsonwebtoken");
-const config = require("config");
 
 exports.create = async (req, res) => {
     let user = await User.findOne({where: {username: req.body.username}});
@@ -14,8 +12,7 @@ exports.create = async (req, res) => {
 
     await User.create(user)
         .then(data=> {
-            const token = data.generateJWT();
-            res.header('x-auth-token', token).send(_.pick(data, ['username']))
+            res.header('x-auth-token', data.generateJWT()).send(_.pick(data, ['username']))
         })
         .catch(err=> res.status(500).send({
             message:
@@ -60,5 +57,4 @@ exports.delete = async (req, res) => {
         .catch(err => res.status(500)
             .send(err.message || "Something went wrong."));
 }
-
 

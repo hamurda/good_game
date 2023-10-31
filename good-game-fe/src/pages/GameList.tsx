@@ -17,7 +17,7 @@ import {Game} from "../services/GameController";
 import {useNavigate} from "react-router-dom";
 
 
-function HomePage() {
+function GameList() {
     const navigate = useNavigate();
     const {data:games} = useGames();
     const deleteGame = useDeleteGame(()=>{});
@@ -73,4 +73,4 @@ function HomePage() {
     );
 }
 
-export default HomePage;
+export default GameList;
