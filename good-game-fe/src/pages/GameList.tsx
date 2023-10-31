@@ -38,7 +38,7 @@ function GameList() {
                 align='stretch'
             >
                 <Box>
-                    <h1>Dashboard</h1>
+                    <h1>Games</h1>
                 </Box>
                 <Box>
                     <TableContainer>
