@@ -1,11 +1,19 @@
 import APIClient from "./APIClient";
 
+export interface Platform {
+    id: number;
+    name: string;
+    slug: string;
+}
+
 export interface Game {
     id: number,
     name: string,
     genre: string,
     description: string,
     platform:string,
+    background_image: string,
+    platforms: Platform[],
 }
 
 const apiClient = new APIClient<Game>("/games");
