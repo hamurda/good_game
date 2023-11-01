@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
         games_count: {
             type: DataTypes.INTEGER
         },
-        image_background: {
+        background_image: {
             type: DataTypes.STRING
         },
         description: {

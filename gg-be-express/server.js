@@ -22,8 +22,9 @@ app.get("/", (req, res) => {
     res.json({ message: "Welcome to Good Game." });
 });
 
-require('./src/routes/game.routes')(app);
-require('./src/routes/user.routes')(app);
+require('./src/routes/game.router')(app);
+require('./src/routes/genre.router')(app);
+require('./src/routes/user.router')(app);
 require('./src/routes/auth.router')(app);
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
