@@ -11,12 +11,10 @@ module.exports = (sequelize) => {
         genre: {
             type: DataTypes.STRING
         },
-        platform: {
-            type: DataTypes.STRING
-        },
         published: {
             type: DataTypes.BOOLEAN
-        }
+        },
+        background_image: {type: DataTypes.STRING},
     });
 
     return Game;

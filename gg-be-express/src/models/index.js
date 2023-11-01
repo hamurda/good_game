@@ -16,6 +16,10 @@ db.sequelize = sequelize;
 
 db.games = require("./game.model")(sequelize);
 db.users = require("./user.model")(sequelize);
+db.platforms = require("./platform.model")(sequelize);
+
+db.games.belongsToMany(db.platforms, {through: 'PlatformGame' });
+db.platforms.belongsToMany(db.games, {through: 'PlatformGame' });
 
 sequelize.authenticate().then(() => {
     console.log('Connection has been established successfully.');
