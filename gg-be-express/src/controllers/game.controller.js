@@ -1,4 +1,5 @@
 const Game = require("../models").games;
+const Platform = require("../models").platforms;
 
 
 exports.create = async (req, res) => {
@@ -14,7 +15,8 @@ exports.create = async (req, res) => {
         description: req.body.description,
         genre: req.body.genre,
         platform: req.body.platform,
-        published: req.body.published ? req.body.published : false
+        published: req.body.published ? req.body.published : false,
+        background_image: req.body.background_image,
     };
 
     await Game.create(game)
@@ -31,7 +33,16 @@ exports.getAll = async (req, res) => {
 };
 
 exports.findAll = async (req, res) => {
-    const games = await Game.findAll();
+    const games = await Game.findAll(
+        {include:[{
+                model:Platform,
+                as: "platforms",
+                attributes: ["id", "name", "slug"],
+                through: {
+                    attributes:[],
+                }
+            }]}
+    );
     res.send(games);
 };
 
