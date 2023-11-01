@@ -12,14 +12,6 @@ class GenreController{
     getAllGenres = () => {
         return apiClient.getAll();
     }
-
-    addNewGenre = (newGenre:Genre)  => {
-        return apiClient.post(newGenre);
-    }
-
-    deleteGame = (genre: Genre) => {
-        return apiClient.delete(genre.id);
-    }
 }
 
 export default new GenreController;

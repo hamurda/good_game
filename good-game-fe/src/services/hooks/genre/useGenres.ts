@@ -1,13 +1,13 @@
 import {useQuery} from "@tanstack/react-query";
-import GameController, {Game} from "../../GameController";
-import {CACHE_KEY_GAMES} from "../constants";
+import GenreController, {Genre} from "../../GenreController";
+import {CACHE_KEY_GENRES} from "../constants";
 
 
-const useGames = () => {
-    return useQuery<Game[], Error>({
-        queryKey: CACHE_KEY_GAMES,
-        queryFn: GameController.getAllGames
+const useGenres = () => {
+    return useQuery<Genre[], Error>({
+        queryKey: CACHE_KEY_GENRES,
+        queryFn: GenreController.getAllGenres
     })
 }
 
-export default useGames;
+export default useGenres;

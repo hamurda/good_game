@@ -14,7 +14,6 @@ const GameCard = ({game} :Props) =>{
             <CardBody>
                 <Heading fontSize='2xl'>{game.name}</Heading>
                 <PlatformIconList platforms={game.platforms}/>
-
             </CardBody>
         </Card>
     );
