@@ -1,5 +1,6 @@
 const Game = require("../models").games;
 const Platform = require("../models").platforms;
+const Genre = require("../models").genres;
 
 
 exports.create = async (req, res) => {
@@ -41,7 +42,15 @@ exports.findAll = async (req, res) => {
                 through: {
                     attributes:[],
                 }
-            }]}
+            },
+                {
+                    model:Genre,
+                    as: "genres",
+                    attributes: ["id", "name", "slug"],
+                    through: {
+                        attributes:[],
+                    }
+                }]}
     );
     res.send(games);
 };
