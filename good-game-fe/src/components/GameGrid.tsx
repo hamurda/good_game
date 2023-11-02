@@ -11,7 +11,7 @@ const GameGrid = () => {
     const {data:games, error} = useGames();
     const deleteGame = useDeleteGame(()=>{});
 
-    if(error) return <Text>{error.message}</Text>
+    if(error) return <Text textAlign='left' fontSize='3xl'>{error.message}</Text>
 
     const handleDeleteBtn = (game:Game) => {
         deleteGame.mutate(game);
