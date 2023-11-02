@@ -1,7 +1,8 @@
 import {Game} from "../services/GameController";
-import {Card, CardBody, Heading, HStack, Image, Text} from "@chakra-ui/react";
+import {Card, CardBody, Heading, HStack, Image} from "@chakra-ui/react";
 import PlatformIconList from "./PlatformIconList";
 import noImage from "../assets/no-image-placeholder.webp";
+import Emoji from "./Emoji";
 
 export interface Props {
     game: Game
@@ -16,7 +17,7 @@ const GameCard = ({game} :Props) =>{
                 <HStack justifyContent='space-between' marginBottom={3}>
                     <PlatformIconList platforms={game.platforms}/>
                 </HStack>
-                <Heading textAlign={'left'} fontSize='2xl'>{game.name}</Heading>
+                <Heading textAlign={'left'} fontSize='2xl'>{game.name}<Emoji rating={game.rating_top}/></Heading>
             </CardBody>
         </Card>
     );

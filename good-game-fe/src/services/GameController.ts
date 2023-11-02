@@ -8,6 +8,7 @@ export interface Game {
     description: string,
     platform:string,
     background_image: string,
+    rating_top: number,
     genres: Genre[],
     platforms: Platform[],
 }
