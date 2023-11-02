@@ -1,5 +1,5 @@
 module.exports = app =>{
-    const games = require("../controllers/game.controller.js");
+    const platforms = require("../controllers/platform.controller");
     const router = require("express").Router();
 
 
@@ -10,12 +10,11 @@ module.exports = app =>{
         next();
     });
 
-    router.get("/", games.findAll);
-    router.post("/", games.create);
-    router.get("/:id", games.findById);
-    router.put("/:id", games.update);
-    router.delete("/:id", games.delete);
-    router.get("/byGenre", games.findAllByGenre);
+    router.get("/", platforms.findAll);
+    router.post("/", platforms.create);
+    router.get("/:id", platforms.findById);
+    router.put("/:id", platforms.update);
+    router.delete("/:id", platforms.delete);
 
-    app.use('/api/games', router);
+    app.use('/api/platforms', router);
 }

@@ -24,6 +24,7 @@ app.get("/", (req, res) => {
 
 require('./src/routes/game.router')(app);
 require('./src/routes/genre.router')(app);
+require('./src/routes/platform.router')(app);
 require('./src/routes/user.router')(app);
 require('./src/routes/auth.router')(app);
 const PORT = process.env.PORT || 8080;

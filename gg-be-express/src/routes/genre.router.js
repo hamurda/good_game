@@ -1,4 +1,3 @@
-const genres = require("../controllers/game.controller.js");
 module.exports = app =>{
     const genres = require("../controllers/genre.controller.js");
     const router = require("express").Router();
