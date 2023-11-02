@@ -4,6 +4,7 @@ export interface Genre {
     id: number,
     name: string,
     slug: string,
+    background_image: string,
 }
 
 const apiClient = new APIClient<Genre>("/genres");
