@@ -4,10 +4,15 @@ import useGames from "../services/hooks/game/useGames";
 import useDeleteGame from "../services/hooks/game/useDeleteGame";
 import {Game} from "../services/GameController";
 import GameCard from "./GameCard";
+import {Genre} from "../services/GenreController";
 
-const GameGrid = () => {
+interface Props {
+    selectedGenre: Genre | null,
+}
+
+const GameGrid = ({selectedGenre}:Props) => {
     const navigate = useNavigate();
-    const {data:games} = useGames();
+    const {data:games} = useGames(selectedGenre);
     const deleteGame = useDeleteGame(()=>{});
 
     const handleDeleteBtn = (game:Game) => {

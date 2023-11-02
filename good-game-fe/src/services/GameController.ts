@@ -1,4 +1,5 @@
 import APIClient from "./APIClient";
+import {Genre} from "./GenreController";
 
 export interface Platform {
     id: number;
@@ -20,6 +21,11 @@ const apiClient = new APIClient<Game>("/games");
 
 class GameController{
     getAllGames = () => {
+        return apiClient.getAll();
+    }
+
+    getAllGamesByGenre = (genre: Genre) => {
+        apiClient.endpoint.concat("/${genre.id}");
         return apiClient.getAll();
     }
 

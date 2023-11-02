@@ -1,12 +1,13 @@
 import {useQuery} from "@tanstack/react-query";
 import GameController, {Game} from "../../GameController";
 import {CACHE_KEY_GAMES} from "../constants";
+import {Genre} from "../../GenreController";
 
 
-const useGames = () => {
-    return useQuery<Game[], Error>({
+const useGames = (selectedGenre : Genre|null) => {
+    return useQuery<Game[], Error>( {
         queryKey: CACHE_KEY_GAMES,
-        queryFn: GameController.getAllGames
+        queryFn:GameController.getAllGames,
     })
 }
 
