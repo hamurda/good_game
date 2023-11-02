@@ -4,11 +4,13 @@ import useGames from "../services/hooks/game/useGames";
 import useDeleteGame from "../services/hooks/game/useDeleteGame";
 import {Game} from "../services/GameController";
 import GameCard from "./GameCard";
+import GameCardSkeleton from "./GameCardSkeleton";
+import GameCardContainer from "./GameCardContainer";
 
 
 const GameGrid = () => {
     const navigate = useNavigate();
-    const {data:games, error} = useGames();
+    const {data:games, error, isLoading} = useGames();
     const deleteGame = useDeleteGame(()=>{});
 
     if(error) return <Text textAlign='left' fontSize='3xl'>{error.message}</Text>
@@ -21,11 +23,21 @@ const GameGrid = () => {
         navigate("/newGame");
     }
 
+    const skeletons = [1,2,3,4,5,6];
+
     return (
         <>
             <SimpleGrid columns={{sm:1, md:2, lg:3, xl:4}} spacing={6} padding='10px'>
+                {isLoading &&
+                skeletons.map((skeleton) => (
+                    <GameCardContainer>
+                        <GameCardSkeleton key={skeleton}/>
+                    </GameCardContainer>
+                    ))}
                 {games?.map((game)=> (
-                    <GameCard game={game} key={game.id} />
+                    <GameCardContainer>
+                        <GameCard game={game} key={game.id} />
+                    </GameCardContainer>
                     ))}
             </SimpleGrid>
         </>
