@@ -1,19 +1,14 @@
 import APIClient from "./APIClient";
 import {Genre} from "./GenreController";
-
-export interface Platform {
-    id: number;
-    name: string;
-    slug: string;
-}
+import {Platform} from "./PlatformController";
 
 export interface Game {
     id: number,
     name: string,
-    genre: string,
     description: string,
     platform:string,
     background_image: string,
+    genres: Genre[],
     platforms: Platform[],
 }
 
