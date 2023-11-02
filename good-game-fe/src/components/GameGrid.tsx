@@ -1,18 +1,18 @@
-import {Button, SimpleGrid, Td, Tr} from "@chakra-ui/react";
+import {SimpleGrid} from "@chakra-ui/react";
 import {useNavigate} from "react-router-dom";
 import useGames from "../services/hooks/game/useGames";
 import useDeleteGame from "../services/hooks/game/useDeleteGame";
 import {Game} from "../services/GameController";
 import GameCard from "./GameCard";
-import {Genre} from "../services/GenreController";
+import {GameQuery} from "../App";
 
 interface Props {
-    selectedGenre: Genre | null,
+    gameQuery: GameQuery,
 }
 
-const GameGrid = ({selectedGenre}:Props) => {
+const GameGrid = ({gameQuery}:Props) => {
     const navigate = useNavigate();
-    const {data:games} = useGames(selectedGenre);
+    const {data:games} = useGames(gameQuery.genre);
     const deleteGame = useDeleteGame(()=>{});
 
     const handleDeleteBtn = (game:Game) => {
@@ -27,7 +27,7 @@ const GameGrid = ({selectedGenre}:Props) => {
         <>
             <SimpleGrid columns={{sm:1, md:2, lg:3, xl:5}} spacing={3} padding='10px'>
                 {games?.map((game)=> (
-                    <GameCard game={game} />
+                    <GameCard game={game} key={game.id} />
                     ))}
             </SimpleGrid>
         </>
