@@ -14,6 +14,7 @@ exports.create = async (req, res) => {
     const game = {
         name: req.body.name,
         description: req.body.description,
+        rating_top: req.body.rating_top,
         genre: req.body.genre,
         platform: req.body.platform,
         published: req.body.published ? req.body.published : false,

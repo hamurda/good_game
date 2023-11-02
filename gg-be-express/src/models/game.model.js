@@ -8,8 +8,8 @@ module.exports = (sequelize) => {
         description: {
             type: DataTypes.STRING
         },
-        genre: {
-            type: DataTypes.STRING
+        rating_top: {
+            type: DataTypes.TINYINT
         },
         published: {
             type: DataTypes.BOOLEAN
