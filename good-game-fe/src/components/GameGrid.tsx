@@ -1,28 +1,14 @@
 import {SimpleGrid, Text} from "@chakra-ui/react";
-import {useNavigate} from "react-router-dom";
 import useGames from "../services/hooks/game/useGames";
-import useDeleteGame from "../services/hooks/game/useDeleteGame";
-import {Game} from "../services/GameController";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 
 
 const GameGrid = () => {
-    const navigate = useNavigate();
     const {data:games, error, isLoading} = useGames();
-    const deleteGame = useDeleteGame(()=>{});
 
     if(error) return <Text textAlign='left' fontSize='3xl'>{error.message}</Text>
-
-    const handleDeleteBtn = (game:Game) => {
-        deleteGame.mutate(game);
-    }
-
-    const handleAddBtn = () => {
-        navigate("/newGame");
-    }
-
     const skeletons = [1,2,3,4,5,6];
 
     return (
