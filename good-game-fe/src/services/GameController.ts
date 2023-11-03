@@ -20,11 +20,6 @@ class GameController{
         return apiClient.getAll();
     }
 
-    getAllGamesByGenre = (genre: Genre) => {
-        apiClient.endpoint.concat("/${genre.id}");
-        return apiClient.getAll();
-    }
-
     addNewGame = (newGame:Game)  => {
         return apiClient.post(newGame);
     }
