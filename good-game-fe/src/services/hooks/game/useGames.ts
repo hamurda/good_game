@@ -7,6 +7,7 @@ const useGames = () => {
     return useQuery<Game[], Error>( {
         queryKey: CACHE_KEY_GAMES,
         queryFn:GameController.getAllGames,
+        staleTime: 24 * 60 * 60 * 1000, //24h
     })
 }
 

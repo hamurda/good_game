@@ -6,7 +6,8 @@ import PlatformController, {Platform} from "../../PlatformController";
 const usePlatforms = () => {
     return useQuery<Platform[], Error>({
         queryKey: CACHE_KEY_PLATFORMS,
-        queryFn: PlatformController.getAllPlatforms
+        queryFn: PlatformController.getAllPlatforms,
+        staleTime: 24 * 60 * 60 * 1000, //24h
     })
 }
 
